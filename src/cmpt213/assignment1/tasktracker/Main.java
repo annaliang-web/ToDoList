@@ -32,10 +32,8 @@ public class Main {
             File readTaskFile = new File("taskFile.json");//read json file
 //            Type listType = new TypeToken<ArrayList<Task>>(){
 //            }.getType();
-            JsonReader jReader = new JsonReader(new FileReader(readTaskFile));
-//            JsonElement fileElement = JsonParser.parseReader(new FileReader(readTaskFile)); //parse json file
-            tasks = gson.fromJson(jReader,Task.class);
-//            System.out.println(tasks.get(0));
+//            JsonReader jReader = new JsonReader(new FileReader(readTaskFile));
+//            tasks = gson.fromJson(jReader,Task.class);
         } catch (FileNotFoundException e) {
 //            e.printStackTrace();
             System.out.println("File not found.");
