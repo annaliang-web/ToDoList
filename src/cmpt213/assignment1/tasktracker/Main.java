@@ -1,15 +1,15 @@
 package cmpt213.assignment1.tasktracker;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import java.lang.reflect.Type;
+//import com.google.gson.JsonElement;
+//import com.google.gson.JsonObject;
+//import com.google.gson.JsonParser;
+//import com.google.gson.reflect.TypeToken;
+//import com.google.gson.stream.JsonReader;
+//import java.lang.reflect.Type;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+//import java.io.FileReader;
 import java.io.PrintWriter;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -19,11 +19,10 @@ import java.util.Scanner;
 
 public class Main {
     //Static field:
-    public static ArrayList<Task> tasks = new ArrayList<Task>();//array object stores many task objects(tasks)
+    public static ArrayList<Task> tasks = new ArrayList<>();//array object stores many task objects(tasks)
     public static Scanner keyboard = new Scanner(System.in); //for keyboard input
     public static int countIncomplete = 0;//count number of (complete == false)incomplete tasks
     private static PrintWriter taskFile;
-    private static String jsonTaskArrayList;
 
     public static void main(String[] args) {
         try {
@@ -100,7 +99,7 @@ public class Main {
         }
         System.out.print("-> Enter MINUTES of due date(0-59): ");//minutes
         int minutes = keyboard.nextInt();
-        while (minutes < -1 || minutes> 59) {//handle negative/zero/over 60mins
+        while (minutes < -1 || minutes> 59) {//handle negative/zero/over 60 mins
             System.out.print("~~Invalid input. Please enter minutes of due date(0-59):  ");
             minutes = keyboard.nextInt();
         }
@@ -193,8 +192,8 @@ public class Main {
         int countUpcoming = 0;
         GregorianCalendar now = new GregorianCalendar();
         if (tasks.size()>0){
-            for (int i = 0; i <tasks.size() ; i++) {
-                if(tasks.get(i).getComplete()=="No"){
+            for (int i = 0; i <tasks.size(); i++) {
+                if(tasks.get(i).getComplete().equals("No")){
                     if (tasks.get(i).getDueDate().compareTo(now)==1){//return upcoming value
                         int taskNum = countUpcoming +1;
                         System.out.println("***Task" + taskNum + ":");
@@ -218,7 +217,7 @@ public class Main {
     //=========== Exit the program, option 7
     public static void exit(){
         //=========== Serialize(Save) arrayList objects in Json
-        jsonTaskArrayList = new Gson().toJson(tasks);
+        String jsonTaskArrayList = new Gson().toJson(tasks);
         taskFile.write(jsonTaskArrayList);//write tasks arrayList on json file
         taskFile.close();
         System.out.println("*** Good bye! ***");
